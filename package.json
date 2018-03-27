@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.0.5",
+    "prettier": "^1.11.1"
+  },
+  "scripts": {
+    "coverage": "nyc mocha \"./test/**/*spec.js\""
+  },
+  "nyc": {
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "exclude": [
+      "test/**.*"
+    ]
+  }
+}
