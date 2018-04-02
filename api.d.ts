@@ -25,7 +25,6 @@ export interface Disjunction {
 
 export interface Alternative {
     type: "Alternative"
-
     value: Term
 }
 
@@ -47,10 +46,11 @@ export interface Assertion {
     value?: Disjunction
 }
 
+// TODO: split into 4 separate interfaces
 export interface Atom {
-    type: "GroupBackReference" | "Character" | "Set"
+    type: "GroupBackReference" | "Character" | "Set" | "Group"
 
-    value: number[] | number
+    value: number[] | number | Disjunction
 }
 
 export interface Quantifier {

@@ -8,7 +8,7 @@ describe("The RegExp to Ast parser", () => {
         parser = new RegExpParser()
     })
 
-    it("can parse a simple regExp", () => {
+    it("can parse a simple regExp with a single alternative", () => {
         const ast = parser.pattern("/abc/")
         expect(ast).to.deep.equal({
             type: "Pattern",
@@ -44,6 +44,47 @@ describe("The RegExp to Ast parser", () => {
                                 value: {
                                     type: "character",
                                     value: 99
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        })
+    })
+
+    it("can parse a simple regExp with a single alternative", () => {
+        const ast = parser.pattern("/(?:)/")
+        expect(ast).to.deep.equal({
+            type: "Pattern",
+            flags: {
+                global: false,
+                ignoreCase: false,
+                multiLine: false,
+                unicode: false,
+                sticky: false
+            },
+            value: {
+                type: "Disjunction",
+                value: [
+                    {
+                        type: "Alternative",
+                        value: [
+                            {
+                                type: "Term",
+                                value: {
+                                    type: "Group",
+                                    capturing: false,
+                                    groupIdx: 0,
+                                    value: {
+                                        type: "Disjunction",
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                value: []
+                                            }
+                                        ]
+                                    }
                                 }
                             }
                         ]
