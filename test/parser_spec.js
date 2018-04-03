@@ -26,25 +26,16 @@ describe("The RegExp to Ast parser", () => {
                         type: "Alternative",
                         value: [
                             {
-                                type: "Term",
-                                value: {
-                                    type: "character",
-                                    value: 97
-                                }
+                                type: "character",
+                                value: 97
                             },
                             {
-                                type: "Term",
-                                value: {
-                                    type: "character",
-                                    value: 98
-                                }
+                                type: "character",
+                                value: 98
                             },
                             {
-                                type: "Term",
-                                value: {
-                                    type: "character",
-                                    value: 99
-                                }
+                                type: "character",
+                                value: 99
                             }
                         ]
                     }
@@ -53,7 +44,7 @@ describe("The RegExp to Ast parser", () => {
         })
     })
 
-    it("can parse a simple regExp with a single alternative", () => {
+    it("can parse an empty regExp", () => {
         const ast = parser.pattern("/(?:)/")
         expect(ast).to.deep.equal({
             type: "Pattern",
@@ -71,20 +62,17 @@ describe("The RegExp to Ast parser", () => {
                         type: "Alternative",
                         value: [
                             {
-                                type: "Term",
+                                type: "Group",
+                                capturing: false,
+                                idx: 0,
                                 value: {
-                                    type: "Group",
-                                    capturing: false,
-                                    groupIdx: 0,
-                                    value: {
-                                        type: "Disjunction",
-                                        value: [
-                                            {
-                                                type: "Alternative",
-                                                value: []
-                                            }
-                                        ]
-                                    }
+                                    type: "Disjunction",
+                                    value: [
+                                        {
+                                            type: "Alternative",
+                                            value: []
+                                        }
+                                    ]
                                 }
                             }
                         ]

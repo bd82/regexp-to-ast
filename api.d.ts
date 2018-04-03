@@ -25,14 +25,10 @@ export interface Disjunction {
 
 export interface Alternative {
     type: "Alternative"
-    value: Term
+    value: Term[]
 }
 
-export interface Term {
-    type: "Term"
-    value: Assertion | Atom
-    quantifier: Quantifier
-}
+export type Term = Atom | Assertion
 
 export interface Assertion {
     type:
@@ -46,11 +42,31 @@ export interface Assertion {
     value?: Disjunction
 }
 
-// TODO: split into 4 separate interfaces
-export interface Atom {
-    type: "GroupBackReference" | "Character" | "Set" | "Group"
+export type Atom = Character | Set | Group | GroupBackReference
 
-    value: number[] | number | Disjunction
+export interface Character {
+    type: "Character"
+    value: number
+    quantifier?: Quantifier
+}
+
+export interface Set {
+    type: "Set"
+    value: number[]
+    quantifier?: Quantifier
+}
+
+export interface Group {
+    type: "Group"
+    value: Disjunction
+    idx: number
+    quantifier?: Quantifier
+}
+
+export interface GroupBackReference {
+    type: "GroupBackReference"
+    value: number
+    quantifier?: Quantifier
 }
 
 export interface Quantifier {
