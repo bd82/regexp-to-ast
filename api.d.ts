@@ -70,11 +70,8 @@ export interface GroupBackReference {
 }
 
 export interface Quantifier {
-    type:
-        | "ZeroOrMore"
-        | "OneOrMore"
-        | "ZeroOrOne"
-        | "ExactReps"
-        | "ClosedRangeReps"
-        | "AtLeastReps"
+    type: "Quantifier"
+    atLeast: number
+    atMost: number
+    greedy: boolean
 }
