@@ -146,15 +146,15 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 98
                                 },
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 99
                                 }
                             ]
@@ -172,7 +172,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 }
                             ]
@@ -181,7 +181,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 98
                                 }
                             ]
@@ -190,7 +190,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 99
                                 }
                             ]
@@ -208,7 +208,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 }
                             ]
@@ -221,7 +221,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 99
                                 }
                             ]
@@ -244,7 +244,7 @@ describe("The RegExp to Ast parser", () => {
                                     type: "StartAnchor"
                                 },
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 }
                             ]
@@ -262,7 +262,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
@@ -283,7 +283,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
@@ -304,7 +304,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
@@ -325,7 +325,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
@@ -337,7 +337,7 @@ describe("The RegExp to Ast parser", () => {
                                                 type: "Alternative",
                                                 value: [
                                                     {
-                                                        type: "character",
+                                                        type: "Character",
                                                         value: 98
                                                     }
                                                 ]
@@ -360,7 +360,7 @@ describe("The RegExp to Ast parser", () => {
                             type: "Alternative",
                             value: [
                                 {
-                                    type: "character",
+                                    type: "Character",
                                     value: 97
                                 },
                                 {
@@ -372,7 +372,7 @@ describe("The RegExp to Ast parser", () => {
                                                 type: "Alternative",
                                                 value: [
                                                     {
-                                                        type: "character",
+                                                        type: "Character",
                                                         value: 98
                                                     }
                                                 ]
@@ -386,174 +386,833 @@ describe("The RegExp to Ast parser", () => {
                 })
             })
         })
-    })
 
-    context("quantifiers", () => {
-        it("zero or one", () => {
-            const ast = parser.pattern("/a?/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
-                        value: [
-                            {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 0,
-                                    atMost: 1,
-                                    greedy: true
+        context("quantifiers", () => {
+            it("zero or one", () => {
+                const ast = parser.pattern("/a?/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 0,
+                                        atMost: 1,
+                                        greedy: true
+                                    }
                                 }
-                            }
-                        ]
-                    }
-                ]
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("star", () => {
+                const ast = parser.pattern("/a*/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 0,
+                                        atMost: Infinity,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("plus", () => {
+                const ast = parser.pattern("/a+/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 1,
+                                        atMost: Infinity,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("exactlyX", () => {
+                const ast = parser.pattern("/a{6}/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 6,
+                                        atMost: 6,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("atLeastX", () => {
+                const ast = parser.pattern("/a{2,}/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 2,
+                                        atMost: Infinity,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("atLeastXAtMostY", () => {
+                const ast = parser.pattern("/a{8,12}/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 8,
+                                        atMost: 12,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("nonGreedy", () => {
+                const ast = parser.pattern("/a??/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 0,
+                                        atMost: 1,
+                                        greedy: false
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
             })
         })
 
-        it("star", () => {
-            const ast = parser.pattern("/a*/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
-                        value: [
-                            {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 0,
-                                    atMost: Infinity,
-                                    greedy: true
+        context("atoms", () => {
+            it("patternCharacter", () => {
+                const ast = parser.pattern("/b/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 98
                                 }
-                            }
-                        ]
-                    }
-                ]
+                            ]
+                        }
+                    ]
+                })
             })
-        })
 
-        it("plus", () => {
-            const ast = parser.pattern("/a+/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
-                        value: [
-                            {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 1,
-                                    atMost: Infinity,
-                                    greedy: true
+            it("dotAll", () => {
+                const ast = parser.pattern("/./")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Set",
+                                    complement: true,
+                                    value: [10, 13, 8232, 8233]
                                 }
-                            }
-                        ]
-                    }
-                ]
+                            ]
+                        }
+                    ]
+                })
             })
-        })
 
-        it("exactlyX", () => {
-            const ast = parser.pattern("/a{6}/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
+            context("escapes", () => {
+                context("Character class escapes", () => {
+                    it("digit", () => {
+                        const ast = parser.pattern("/\\d/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                48,
+                                                49,
+                                                50,
+                                                51,
+                                                52,
+                                                53,
+                                                54,
+                                                55,
+                                                56,
+                                                57
+                                            ],
+                                            complement: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("not digit", () => {
+                        const ast = parser.pattern("/\\D/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                48,
+                                                49,
+                                                50,
+                                                51,
+                                                52,
+                                                53,
+                                                54,
+                                                55,
+                                                56,
+                                                57
+                                            ],
+                                            complement: true
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("word character", () => {
+                        const ast = parser.pattern("/\\w/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                95,
+                                                48,
+                                                49,
+                                                50,
+                                                51,
+                                                52,
+                                                53,
+                                                54,
+                                                55,
+                                                56,
+                                                57,
+                                                97,
+                                                98,
+                                                99,
+                                                100,
+                                                101,
+                                                102,
+                                                103,
+                                                104,
+                                                105,
+                                                106,
+                                                107,
+                                                108,
+                                                109,
+                                                110,
+                                                111,
+                                                112,
+                                                113,
+                                                114,
+                                                115,
+                                                116,
+                                                117,
+                                                118,
+                                                119,
+                                                120,
+                                                121,
+                                                122,
+                                                65,
+                                                66,
+                                                67,
+                                                68,
+                                                69,
+                                                70,
+                                                71,
+                                                72,
+                                                73,
+                                                74,
+                                                75,
+                                                76,
+                                                77,
+                                                78,
+                                                79,
+                                                80,
+                                                81,
+                                                82,
+                                                83,
+                                                84,
+                                                85,
+                                                86,
+                                                87,
+                                                88,
+                                                89,
+                                                90
+                                            ],
+                                            complement: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("not word character", () => {
+                        const ast = parser.pattern("/\\W/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                95,
+                                                48,
+                                                49,
+                                                50,
+                                                51,
+                                                52,
+                                                53,
+                                                54,
+                                                55,
+                                                56,
+                                                57,
+                                                97,
+                                                98,
+                                                99,
+                                                100,
+                                                101,
+                                                102,
+                                                103,
+                                                104,
+                                                105,
+                                                106,
+                                                107,
+                                                108,
+                                                109,
+                                                110,
+                                                111,
+                                                112,
+                                                113,
+                                                114,
+                                                115,
+                                                116,
+                                                117,
+                                                118,
+                                                119,
+                                                120,
+                                                121,
+                                                122,
+                                                65,
+                                                66,
+                                                67,
+                                                68,
+                                                69,
+                                                70,
+                                                71,
+                                                72,
+                                                73,
+                                                74,
+                                                75,
+                                                76,
+                                                77,
+                                                78,
+                                                79,
+                                                80,
+                                                81,
+                                                82,
+                                                83,
+                                                84,
+                                                85,
+                                                86,
+                                                87,
+                                                88,
+                                                89,
+                                                90
+                                            ],
+                                            complement: true
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("whitespace", () => {
+                        const ast = parser.pattern("/\\s/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                32,
+                                                12,
+                                                10,
+                                                13,
+                                                9,
+                                                11,
+                                                9,
+                                                160,
+                                                5760,
+                                                8192,
+                                                8193,
+                                                8194,
+                                                8195,
+                                                8196,
+                                                8197,
+                                                8198,
+                                                8199,
+                                                8200,
+                                                8201,
+                                                8202,
+                                                8232,
+                                                8233,
+                                                8239,
+                                                8287,
+                                                12288,
+                                                65279
+                                            ],
+                                            complement: false
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("not whitespace", () => {
+                        const ast = parser.pattern("/\\S/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            value: [
+                                                32,
+                                                12,
+                                                10,
+                                                13,
+                                                9,
+                                                11,
+                                                9,
+                                                160,
+                                                5760,
+                                                8192,
+                                                8193,
+                                                8194,
+                                                8195,
+                                                8196,
+                                                8197,
+                                                8198,
+                                                8199,
+                                                8200,
+                                                8201,
+                                                8202,
+                                                8232,
+                                                8233,
+                                                8239,
+                                                8287,
+                                                12288,
+                                                65279
+                                            ],
+                                            complement: true
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+                })
+
+                context("decimal", () => {
+                    it("of the beast", () => {
+                        const ast = parser.pattern("/\\1/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "GroupBackReference",
+                                            value: 1
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+                })
+
+                context("control escape", () => {
+                    it("form feed", () => {
+                        const ast = parser.pattern("/\\f/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Character",
+                                            value: 12
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("new line", () => {
+                        const ast = parser.pattern("/\\n/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Character",
+                                            value: 10
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("carriage return", () => {
+                        const ast = parser.pattern("/\\r/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Character",
+                                            value: 13
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("horizontal tab", () => {
+                        const ast = parser.pattern("/\\t/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Character",
+                                            value: 9
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("vertical tab", () => {
+                        const ast = parser.pattern("/\\v/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Character",
+                                            value: 11
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+                })
+
+                it("control letter", () => {
+                    const ast = parser.pattern("/\\cB/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
                         value: [
                             {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 6,
-                                    atMost: 6,
-                                    greedy: true
-                                }
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Character",
+                                        value: 2
+                                    }
+                                ]
                             }
                         ]
-                    }
-                ]
+                    })
+                })
+
+                it("invalid control letter", () => {
+                    expect(() => parser.pattern("/\\c9/")).to.throw()
+                })
+
+                it("nul character", () => {
+                    const ast = parser.pattern("/\\0/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
+                        value: [
+                            {
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Character",
+                                        value: 0
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                })
+
+                it("hex", () => {
+                    const ast = parser.pattern("/\\x2d/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
+                        value: [
+                            {
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Character",
+                                        value: 45
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                })
+
+                it("unicode", () => {
+                    const ast = parser.pattern("/\\u000a/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
+                        value: [
+                            {
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Character",
+                                        value: 10
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                })
+
+                it("Identity", () => {
+                    const ast = parser.pattern("/\\*/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
+                        value: [
+                            {
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Character",
+                                        value: 42
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                })
             })
-        })
 
-        it("atLeastX", () => {
-            const ast = parser.pattern("/a{2,}/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
+            context("CharacterClass", () => {
+                it("pattern character", () => {
+                    const ast = parser.pattern("/[a]/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
                         value: [
                             {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 2,
-                                    atMost: Infinity,
-                                    greedy: true
-                                }
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Set",
+                                        complement: false,
+                                        value: [97]
+                                    }
+                                ]
                             }
                         ]
-                    }
-                ]
-            })
-        })
+                    })
+                })
 
-        it("atLeastXAtMostY", () => {
-            const ast = parser.pattern("/a{8,12}/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
+                it("complement", () => {
+                    const ast = parser.pattern("/[^a]/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
                         value: [
                             {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 8,
-                                    atMost: 12,
-                                    greedy: true
-                                }
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Set",
+                                        complement: true,
+                                        value: [97]
+                                    }
+                                ]
                             }
                         ]
-                    }
-                ]
-            })
-        })
+                    })
+                })
 
-        it("nonGreedy", () => {
-            const ast = parser.pattern("/a??/")
-            expect(ast.value).to.deep.equal({
-                type: "Disjunction",
-                value: [
-                    {
-                        type: "Alternative",
+                it("range", () => {
+                    const ast = parser.pattern("/[A-Z]/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
                         value: [
                             {
-                                type: "character",
-                                value: 97,
-                                quantifier: {
-                                    type: "Quantifier",
-                                    atLeast: 0,
-                                    atMost: 1,
-                                    greedy: false
-                                }
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Set",
+                                        complement: false,
+                                        value: [
+                                            65,
+                                            66,
+                                            67,
+                                            68,
+                                            69,
+                                            70,
+                                            71,
+                                            72,
+                                            73,
+                                            74,
+                                            75,
+                                            76,
+                                            77,
+                                            78,
+                                            79,
+                                            80,
+                                            81,
+                                            82,
+                                            83,
+                                            84,
+                                            85,
+                                            86,
+                                            87,
+                                            88,
+                                            89,
+                                            90
+                                        ]
+                                    }
+                                ]
                             }
                         ]
-                    }
-                ]
+                    })
+                })
+
+                it("invalid range", () => {
+                    expect(() => parser.pattern("/[B-A]/")).to.throw(
+                        "Range out of order in character class"
+                    )
+                })
             })
         })
     })
