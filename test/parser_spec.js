@@ -29,7 +29,6 @@ describe("The RegExp to Ast parser", () => {
                                 {
                                     type: "Group",
                                     capturing: false,
-                                    idx: 0,
                                     value: {
                                         type: "Disjunction",
                                         value: [
@@ -1124,6 +1123,95 @@ describe("The RegExp to Ast parser", () => {
             })
 
             context("CharacterClass", () => {
+                context("escapes", () => {
+                    it("closing square parenthesis", () => {
+                        const ast = parser.pattern("/[\\]]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [93]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("backspace", () => {
+                        const ast = parser.pattern("/[\\b]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [8]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("form feed", () => {
+                        const ast = parser.pattern("/[\\f]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [12]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("digits", () => {
+                        const ast = parser.pattern("/[\\d]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [
+                                                48,
+                                                49,
+                                                50,
+                                                51,
+                                                52,
+                                                53,
+                                                54,
+                                                55,
+                                                56,
+                                                57
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+                })
+
                 it("pattern character", () => {
                     const ast = parser.pattern("/[a]/")
                     expect(ast.value).to.deep.equal({
@@ -1212,6 +1300,143 @@ describe("The RegExp to Ast parser", () => {
                     expect(() => parser.pattern("/[B-A]/")).to.throw(
                         "Range out of order in character class"
                     )
+                })
+
+                it("range with set", () => {
+                    const ast = parser.pattern("/[A-\\d]/")
+                    expect(ast.value).to.deep.equal({
+                        type: "Disjunction",
+                        value: [
+                            {
+                                type: "Alternative",
+                                value: [
+                                    {
+                                        type: "Set",
+                                        complement: false,
+                                        value: [
+                                            45,
+                                            48,
+                                            49,
+                                            50,
+                                            51,
+                                            52,
+                                            53,
+                                            54,
+                                            55,
+                                            56,
+                                            57,
+                                            65
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    })
+                })
+            })
+        })
+
+        context("groups", () => {
+            it("capturing", () => {
+                const ast = parser.pattern("/(a)(b)/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Group",
+                                    capturing: true,
+                                    value: {
+                                        type: "Disjunction",
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        value: 97
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    idx: 1
+                                },
+                                {
+                                    type: "Group",
+                                    capturing: true,
+                                    value: {
+                                        type: "Disjunction",
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        value: 98
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    idx: 2
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("non capturing", () => {
+                const ast = parser.pattern("/(?:a)(b)/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Group",
+                                    capturing: false,
+                                    value: {
+                                        type: "Disjunction",
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        value: 97
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    type: "Group",
+                                    capturing: true,
+                                    value: {
+                                        type: "Disjunction",
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        value: 98
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    },
+                                    idx: 1
+                                }
+                            ]
+                        }
+                    ]
                 })
             })
         })

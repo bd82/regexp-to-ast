@@ -59,7 +59,8 @@ export interface Set {
 export interface Group {
     type: "Group"
     value: Disjunction
-    idx: number
+    capturing: boolean
+    idx?: number
     quantifier?: Quantifier
 }
 
