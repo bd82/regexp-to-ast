@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "prettier"
+  ],
+  "env": {
+  },
+  "rules": {
+  },
+  "globals": {
+    "describe": true,
+    "context": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "it": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 5
+  }
+}
