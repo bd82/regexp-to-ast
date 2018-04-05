@@ -6,9 +6,14 @@ Reads a JavaScript Regular Expression **literal**(text) and outputs an Abstract 
 
 ## Installation 
 
-```
-npm install regexp-to-ast
-```
+* npm
+  ```
+    npm install regexp-to-ast
+  ```
+* Browser
+  ```
+    <script src="https://unpkg.com/regexp-to-ast/lib/parser.js"></script>
+  ```
 
 ## API
 
