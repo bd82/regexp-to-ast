@@ -1,39 +1,56 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
+# ------ jobs contents ------
+base-build: &base-build
+  working_directory: ~/repo
+  steps:
+    - checkout
+    - run: yarn
+    - run: yarn run ci_full_flow
+
+# YAML arrays cannot be merged, duplication needed...
+# https://stackoverflow.com/questions/24090177/how-to-merge-yaml-arrays
+deploy-build: &deploy-build
+  <<: *base-build
+  steps:
+    - checkout
+    - run: yarn
+    - run: yarn run ci_full_flow
+    - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+    - run: echo "npm publish"
+
+
+# ------  build configuration/setup ------
 version: 2
 jobs:
-  build:
+  build-node9:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:7.10
+      - image: circleci/node:9-browsers
+    <<: *base-build
 
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+  build-node8:
+    docker:
+      - image: circleci/node:8-browsers
+    <<: *base-build
 
-    working_directory: ~/repo
+  build-node6:
+    docker:
+      - image: circleci/node:6-browsers
+    <<: *base-build
 
-    steps:
-      - checkout
+  deploy:
+    docker:
+      - image: circleci/node:9-browsers
+    <<: *deploy-build
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run: yarn install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
-
-      # run tests!
-      - run: yarn ci_full_flow
-
-
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-node9
+      - build-node8
+      - build-node6
+      - deploy:
+          filters:
+            tags:
+              only: /^v[0-9]+(\.[0-9]+)*/
+            branches:
+              ignore: /.*/
