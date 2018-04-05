@@ -9,7 +9,7 @@ describe("The RegExp to Ast parser", () => {
     })
 
     context("can parse", () => {
-        it("can parse an empty regExp", () => {
+        it("empty regExp", () => {
             const ast = parser.pattern("/(?:)/")
             expect(ast).to.deep.equal({
                 type: "Pattern",
@@ -457,6 +457,12 @@ describe("The RegExp to Ast parser", () => {
                         }
                     ]
                 })
+            })
+
+            it("invalid exactlyX", () => {
+                expect(() => parser.pattern("/a{b}/")).to.throw(
+                    "Expecting a positive integer"
+                )
             })
 
             it("exactlyX", () => {
@@ -1067,22 +1073,10 @@ describe("The RegExp to Ast parser", () => {
                     })
                 })
 
-                it("hex", () => {
-                    const ast = parser.pattern("/\\x2d/")
-                    expect(ast.value).to.deep.equal({
-                        type: "Disjunction",
-                        value: [
-                            {
-                                type: "Alternative",
-                                value: [
-                                    {
-                                        type: "Character",
-                                        value: 45
-                                    }
-                                ]
-                            }
-                        ]
-                    })
+                it("invalid hex", () => {
+                    expect(() => parser.pattern("/\\x2v/")).to.throw(
+                        "Expecting a HexDecimal digits"
+                    )
                 })
 
                 it("unicode", () => {
@@ -1174,6 +1168,82 @@ describe("The RegExp to Ast parser", () => {
                                             type: "Set",
                                             complement: false,
                                             value: [12]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("control letter", () => {
+                        const ast = parser.pattern("/[\\cd]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            complement: false,
+                                            type: "Set",
+                                            value: [4]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("nul", () => {
+                        const ast = parser.pattern("/[\\0a]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [0, 97]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("hexDecimal", () => {
+                        const ast = parser.pattern("/[\\xbc]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            complement: false,
+                                            value: [188]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
+
+                    it("unicode", () => {
+                        const ast = parser.pattern("/[\\u001a]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    value: [
+                                        {
+                                            complement: false,
+                                            type: "Set",
+                                            value: [26]
                                         }
                                     ]
                                 }
@@ -1439,6 +1509,18 @@ describe("The RegExp to Ast parser", () => {
                     ]
                 })
             })
+        })
+    })
+
+    context("Error Handling", () => {
+        it("unexpected end of input", () => {
+            const parse = () => parser.pattern("/a")
+            expect(parse).to.throw("Unexpected end of input")
+        })
+
+        it("unexpected character", () => {
+            const parse = () => parser.pattern("a")
+            expect(parse).to.throw("Expected: '/' but found: 'a' at offset: 0")
         })
     })
 })
