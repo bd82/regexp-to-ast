@@ -1,6 +1,6 @@
 {
   "name": "regexp-to-ast",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "main": "lib/parser.js",
   "repository": "https://github.com/bd82/regexp-to-ast.git",
   "author": "Shahar Soel",
