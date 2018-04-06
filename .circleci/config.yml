@@ -1,45 +1,43 @@
-# ------ jobs contents ------
-base-build: &base-build
-  working_directory: ~/repo
-  steps:
-    - checkout
-    - run: yarn
-    - run: yarn run ci_full_flow
-
-# YAML arrays cannot be merged, duplication needed...
-# https://stackoverflow.com/questions/24090177/how-to-merge-yaml-arrays
-deploy-build: &deploy-build
-  <<: *base-build
-  steps:
-    - checkout
-    - run: yarn
-    - run: yarn run ci_full_flow
-    - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-    - run: echo "npm publish"
-
-
-# ------  build configuration/setup ------
 version: 2
 jobs:
   build-node9:
     docker:
       - image: circleci/node:9-browsers
-    <<: *base-build
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn run ci_full_flow
+      - run: yarn run report_coverage
 
   build-node8:
     docker:
       - image: circleci/node:8-browsers
-    <<: *base-build
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn run ci_full_flow
 
   build-node6:
     docker:
       - image: circleci/node:6-browsers
-    <<: *base-build
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn run ci_full_flow
 
   deploy:
     docker:
       - image: circleci/node:9-browsers
-    <<: *deploy-build
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run: yarn
+      - run: yarn run ci_full_flow
+      - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
+      - run: echo "npm publish"
 
 workflows:
   version: 2
