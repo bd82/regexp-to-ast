@@ -36,3 +36,10 @@ const anotherOutput = regexpParser.pattern(input2)
 ## Compatability 
 
 This library is written in ES**5** style and is compatiable with all major browsers and **modern** node.js versions.
+
+## TODO / Limitations
+
+* Descriptive error messages.
+* Position information in error messages.
+* Support unicode flag escapes.
+* Ensure edge cases described in ["The madness of parsing real world JavaScript regexps"](https://hackernoon.com/the-madness-of-parsing-real-world-javascript-regexps-d9ee336df983) are supported.
