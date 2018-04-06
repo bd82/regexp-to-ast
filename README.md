@@ -1,4 +1,5 @@
 [![CircleCI](https://circleci.com/gh/bd82/regexp-to-ast.svg?style=svg)](https://circleci.com/gh/bd82/regexp-to-ast)
+[![Coverage Status](https://coveralls.io/repos/github/bd82/regexp-to-ast/badge.svg?branch=master)](https://coveralls.io/github/bd82/regexp-to-ast?branch=master)
 
 # regexp-to-ast
 
