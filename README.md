@@ -41,6 +41,8 @@ This library is written in ES**5** style and is compatiable with all major brows
 
 ## TODO / Limitations
 
+* Use polyFill for [string.prototype.at](https://github.com/mathiasbynens/String.prototype.at)
+  to support unicode characters outside BMP.
 * Descriptive error messages.
 * Position information in error messages.
 * Support unicode flag escapes.
