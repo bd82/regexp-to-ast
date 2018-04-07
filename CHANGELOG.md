@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.2.0 (2018-4-7)
 
 - Updated npm metadata.
 

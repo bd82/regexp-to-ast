@@ -1,12 +1,16 @@
 {
   "name": "regexp-to-ast",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "lib/parser.js",
   "repository": "https://github.com/bd82/regexp-to-ast.git",
   "author": "Shahar Soel",
   "license": "MIT",
   "description": "Parses a Regular Expression and outputs an AST",
-  "keywords": ["regExp", "parser", "regular expression"],
+  "keywords": [
+    "regExp",
+    "parser",
+    "regular expression"
+  ],
   "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
