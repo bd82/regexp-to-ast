@@ -5,6 +5,7 @@
   "repository": "https://github.com/bd82/regexp-to-ast.git",
   "author": "Shahar Soel",
   "license": "MIT",
+  "dependencies": {},
   "devDependencies": {
     "chai": "^4.1.2",
     "coveralls": "^3.0.0",
@@ -23,6 +24,7 @@
     "typescript": "^2.8.1"
   },
   "scripts": {
+    "release": "git fetch && git rebase && node scripts/release.js",
     "ci_full_flow": "npm-run-all type_check test check_coverage verify_format",
     "test": "nyc mocha \"./test/**/*spec.js\"",
     "check_coverage": "nyc check-coverage --lines 100 --statements 100 --functions 100",
@@ -31,6 +33,13 @@
     "verify_format": "prettier --no-editorconfig --list-different  \"**/*.@(ts|js)\"",
     "type_check": "tsc"
   },
+  "files": [
+    "lib",
+    "LICENSE",
+    "CHANGELOG.md",
+    "README.md",
+    "api.d.ts"
+  ],
   "nyc": {
     "reporter": [
       "lcov",
@@ -44,6 +53,5 @@
     "semi": false,
     "tabWidth": 4,
     "useTabs": false
-  },
-  "dependencies": {}
+  }
 }
