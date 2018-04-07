@@ -37,7 +37,7 @@ jobs:
       - run: yarn
       - run: yarn run ci_full_flow
       - run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-      - run: echo "npm publish"
+      - run: npm publish
 
 workflows:
   version: 2
