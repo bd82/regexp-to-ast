@@ -7,6 +7,8 @@ const _ = require("lodash")
 
 const packagePath = path.join(__dirname, "../package.json")
 const changeLogPath = path.join(__dirname, "../CHANGELOG.md")
+const parserPath = path.join(__dirname, "../lib/parser.js")
+
 
 const pkgJson = jf.readFileSync(packagePath)
 const changeLogString = fs.readFileSync(changeLogPath, "utf8").toString()
@@ -24,6 +26,7 @@ if (_.includes(process.argv, "patch")) {
 }
 
 module.exports = {
+    parserPath,
     packagePath,
     changeLogPath,
     pkgJson,

@@ -1,5 +1,7 @@
 export as namespace regexpToAst
 
+export const VERSION:number
+
 export class RegExpParser {
     pattern: (input: string) => RegExpAst
 }

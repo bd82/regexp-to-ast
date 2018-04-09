@@ -1,3 +1,7 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- VERSION constant exported.
+
 ## 0.2.1 (2018-4-10)
 
 - Fixed class atoms to allow syntax characters (?, +, *, ...).

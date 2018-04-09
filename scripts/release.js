@@ -45,6 +45,12 @@ const bumpedPkgJson = _.clone(config.pkgJson)
 bumpedPkgJson.version = newVersion
 jf.writeFileSync(config.packagePath, bumpedPkgJson, { spaces: 2, EOL: "\r\n" })
 
+// bump version insider parser.js
+const parserText = fs.readFileSync(config.parserPath, 'utf8');
+const updatedVersionParserText = parserText.replace(`VERSION: "${config.currVersion}"`, `VERSION: "${newVersion}"`)
+fs.writeFileSync(config.parserPath, updatedVersionParserText)
+
+
 // update CHANGELOG.md date
 const nowDate = new Date()
 const nowDateString = nowDate.toLocaleDateString().replace(/\//g, "-")
