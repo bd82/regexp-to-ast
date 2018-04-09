@@ -1,3 +1,8 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- Fixed class atoms to allow syntax characters (?, +, *, ...).
+- Fixed regular atoms to allow closing curly and square brackets.
+
 ## 0.2.0 (2018-4-7)
 
 - Updated npm metadata.
