@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.2.1 (2018-4-10)
 
 - Fixed class atoms to allow syntax characters (?, +, *, ...).
 - Fixed regular atoms to allow closing curly and square brackets.
