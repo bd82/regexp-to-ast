@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.2.2 (2018-4-10)
 
 - VERSION constant exported.
 
