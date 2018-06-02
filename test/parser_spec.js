@@ -948,7 +948,7 @@ describe("The RegExp to Ast parser", () => {
 
                 context("decimal", () => {
                     it("valid escape", () => {
-                        const ast = parser.pattern("/\\1/")
+                        const ast = parser.pattern("/\\123/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
                             value: [
@@ -957,7 +957,7 @@ describe("The RegExp to Ast parser", () => {
                                     value: [
                                         {
                                             type: "GroupBackReference",
-                                            value: 1
+                                            value: 123
                                         }
                                     ]
                                 }
