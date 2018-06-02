@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.2.3 (2018-6-3)
 
 -- Fixed: Quantifier from range can be zero.
 
