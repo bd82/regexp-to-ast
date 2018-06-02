@@ -461,7 +461,7 @@ describe("The RegExp to Ast parser", () => {
 
             it("invalid exactlyX", () => {
                 expect(() => parser.pattern("/a{b}/")).to.throw(
-                    "Expecting a positive integer"
+                    "Expecting an integer"
                 )
             })
 
@@ -537,6 +537,31 @@ describe("The RegExp to Ast parser", () => {
                 })
             })
 
+            it("issue #6 bug", () => {
+                const ast = parser.pattern("/a{0,3}/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97,
+                                    quantifier: {
+                                        type: "Quantifier",
+                                        atLeast: 0,
+                                        atMost: 3,
+                                        greedy: true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            // /[0-9]+[a-z]{0,3}/
             it("nonGreedy", () => {
                 const ast = parser.pattern("/a??/")
                 expect(ast.value).to.deep.equal({
@@ -922,7 +947,7 @@ describe("The RegExp to Ast parser", () => {
                 })
 
                 context("decimal", () => {
-                    it("of the beast", () => {
+                    it("valid escape", () => {
                         const ast = parser.pattern("/\\1/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
