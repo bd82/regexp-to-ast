@@ -460,9 +460,33 @@ describe("The RegExp to Ast parser", () => {
             })
 
             it("invalid exactlyX", () => {
-                expect(() => parser.pattern("/a{b}/")).to.throw(
-                    "Expecting an integer"
-                )
+                const ast = parser.pattern("/a{b}/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 97
+                                },
+                                {
+                                    type: "Character",
+                                    value: 123
+                                },
+                                {
+                                    type: "Character",
+                                    value: 98
+                                },
+                                {
+                                    type: "Character",
+                                    value: 125
+                                }
+                            ]
+                        }
+                    ]
+                })
             })
 
             it("exactlyX", () => {

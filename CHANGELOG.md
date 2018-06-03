@@ -1,6 +1,10 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- Fixed: Quantifier identifying using backtracking instead of lookahead.
+
 ## 0.2.3 (2018-6-3)
 
--- Fixed: Quantifier from range can be zero.
+- Fixed: Quantifier from range can be zero.
 
 ## 0.2.2 (2018-4-10)
 
