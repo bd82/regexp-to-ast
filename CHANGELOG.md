@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.2.4 (2018-6-6)
 
 - Fixed: Quantifier identifying using backtracking instead of lookahead.
 
