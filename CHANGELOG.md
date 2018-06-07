@@ -1,3 +1,7 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- An AST Visitor class is provided to easily traverse the AST output (See main README.md)
+
 ## 0.2.4 (2018-6-6)
 
 - Fixed: Quantifier identifying using backtracking instead of lookahead.
