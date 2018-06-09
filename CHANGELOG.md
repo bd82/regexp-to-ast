@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.1 (2018-6-9)
 
 - Added "typings" property in package.json for TypeScript consumers.
 - Fixed: Version number in regexpToAst.VERSION property.
