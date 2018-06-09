@@ -1,3 +1,8 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- Added "typings" property in package.json for TypeScript consumers.
+- Fixed: Version number in regexpToAst.VERSION property.
+
 ## 0.3.0 (2018-6-9)
 
 - An AST Visitor class is provided to easily traverse the AST output (See main README.md)

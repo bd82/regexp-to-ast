@@ -39,6 +39,7 @@
     "verify_format": "prettier --no-editorconfig --list-different  \"**/*.@(ts|js)\"",
     "type_check": "tsc"
   },
+  "typings": "api.d.ts",
   "files": [
     "lib",
     "LICENSE",

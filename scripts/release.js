@@ -65,7 +65,7 @@ fs.writeFileSync(config.changeLogPath, changeLogDate)
 // Create commit and push to master
 const newTagName = config.tagPrefix + newVersion
 
-myRepo.addSync([config.packagePath, config.changeLogPath, config.htmlDocsPath])
+myRepo.addSync([config.packagePath, config.changeLogPath, config.htmlDocsPath, config.parserPath])
 myRepo.commitSync(`release ${newVersion}`)
 myRepo.createTagSync(newTagName)
 myRepo.push("origin", "master", () => {
