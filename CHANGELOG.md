@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.2 (2018-6-9)
 
 - Fixed: Visitor APIs were lacking the node argument.
 
