@@ -3,16 +3,20 @@ export as namespace regexpToAst
 export const VERSION: number
 
 export class RegExpParser {
-    pattern: (input: string) => RegExpAst
+    pattern: (input: string) => RegExpPattern
 }
 
-export interface RegExpAst {
+export interface IRegExpAST {
+    type: string
+}
+
+export interface RegExpPattern extends IRegExpAST {
     type: "Pattern"
     flags: RegExpFlags
     value: Disjunction
 }
 
-export interface RegExpFlags {
+export interface RegExpFlags extends IRegExpAST {
     type: "Flags"
     global: boolean
     ignoreCase: boolean
@@ -21,19 +25,19 @@ export interface RegExpFlags {
     sticky: boolean
 }
 
-export interface Disjunction {
+export interface Disjunction extends IRegExpAST {
     type: "Disjunction"
     value: Alternative[]
 }
 
-export interface Alternative {
+export interface Alternative extends IRegExpAST {
     type: "Alternative"
     value: Term[]
 }
 
 export type Term = Atom | Assertion
 
-export interface Assertion {
+export interface Assertion extends IRegExpAST {
     type:
         | "StartAnchor"
         | "EndAnchor"
@@ -47,19 +51,19 @@ export interface Assertion {
 
 export type Atom = Character | Set | Group | GroupBackReference
 
-export interface Character {
+export interface Character extends IRegExpAST {
     type: "Character"
     value: number
     quantifier?: Quantifier
 }
 
-export interface Set {
+export interface Set extends IRegExpAST {
     type: "Set"
     value: number[]
     quantifier?: Quantifier
 }
 
-export interface Group {
+export interface Group extends IRegExpAST {
     type: "Group"
     value: Disjunction
     capturing: boolean
@@ -67,13 +71,13 @@ export interface Group {
     quantifier?: Quantifier
 }
 
-export interface GroupBackReference {
+export interface GroupBackReference extends IRegExpAST {
     type: "GroupBackReference"
     value: number
     quantifier?: Quantifier
 }
 
-export interface Quantifier {
+export interface Quantifier extends IRegExpAST {
     type: "Quantifier"
     atLeast: number
     atMost: number
@@ -85,13 +89,13 @@ export class BaseRegExpVisitor {
      * The entry point visitor method.
      * This will dispatch to the specific visitor method.
      */
-    visit()
+    visit(node: IRegExpAST)
 
     /**
      * The specific visitor methods
      * Override some of these of create custom visitors.
      */
-    visitPattern(node: RegExpAst)
+    visitPattern(node: RegExpPattern)
     visitFlags(node: RegExpFlags)
     visitDisjunction(node: Disjunction)
     visitAlternative(node: Alternative)
