@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.0 (2018-6-9)
 
 - An AST Visitor class is provided to easily traverse the AST output (See main README.md)
 
