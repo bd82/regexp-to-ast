@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.3 (2018-6-9)
 
 - Types: All AST node types extend a base interface.
 
