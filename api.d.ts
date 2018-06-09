@@ -13,6 +13,7 @@ export interface RegExpAst {
 }
 
 export interface RegExpFlags {
+    type: "Flags"
     global: boolean
     ignoreCase: boolean
     multiLine: boolean
@@ -77,4 +78,32 @@ export interface Quantifier {
     atLeast: number
     atMost: number
     greedy: boolean
+}
+
+export class BaseRegExpVisitor {
+    /**
+     * The entry point visitor method.
+     * This will dispatch to the specific visitor method.
+     */
+    visit()
+
+    /**
+     * The specific visitor methods
+     * Override some of these of create custom visitors.
+     */
+    visitPattern()
+    visitFlags()
+    visitDisjunction()
+    visitAlternative()
+    visitStartAnchor()
+    visitEndAnchor()
+    visitWordBoundary()
+    visitNonWordBoundary()
+    visitLookahead()
+    visitNegativeLookahead()
+    visitCharacter()
+    visitSet()
+    visitGroup()
+    visitGroupBackReference()
+    visitQuantifier()
 }

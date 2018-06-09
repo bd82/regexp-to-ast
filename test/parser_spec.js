@@ -1,4 +1,4 @@
-const { RegExpParser } = require("../lib/parser")
+const { RegExpParser, BaseRegExpVisitor } = require("../lib/regexp-to-ast")
 const { expect } = require("chai")
 
 describe("The RegExp to Ast parser", () => {
@@ -14,6 +14,7 @@ describe("The RegExp to Ast parser", () => {
             expect(ast).to.deep.equal({
                 type: "Pattern",
                 flags: {
+                    type: "Flags",
                     global: false,
                     ignoreCase: false,
                     multiLine: false,
@@ -50,6 +51,8 @@ describe("The RegExp to Ast parser", () => {
             it("global", () => {
                 const ast = parser.pattern("/(?:)/g")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: true,
                     ignoreCase: false,
                     multiLine: false,
@@ -61,6 +64,8 @@ describe("The RegExp to Ast parser", () => {
             it("ignoreCase", () => {
                 const ast = parser.pattern("/(?:)/i")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: false,
                     ignoreCase: true,
                     multiLine: false,
@@ -72,6 +77,8 @@ describe("The RegExp to Ast parser", () => {
             it("multiLine", () => {
                 const ast = parser.pattern("/(?:)/m")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: false,
                     ignoreCase: false,
                     multiLine: true,
@@ -83,6 +90,8 @@ describe("The RegExp to Ast parser", () => {
             it("unicode", () => {
                 const ast = parser.pattern("/(?:)/u")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: false,
                     ignoreCase: false,
                     multiLine: false,
@@ -94,6 +103,8 @@ describe("The RegExp to Ast parser", () => {
             it("ignoreCase", () => {
                 const ast = parser.pattern("/(?:)/y")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: false,
                     ignoreCase: false,
                     multiLine: false,
@@ -105,6 +116,8 @@ describe("The RegExp to Ast parser", () => {
             it("none", () => {
                 const ast = parser.pattern("/(?:)/")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: false,
                     ignoreCase: false,
                     multiLine: false,
@@ -116,6 +129,8 @@ describe("The RegExp to Ast parser", () => {
             it("all", () => {
                 const ast = parser.pattern("/(?:)/gimuy")
                 expect(ast.flags).to.deep.equal({
+                    type: "Flags",
+
                     global: true,
                     ignoreCase: true,
                     multiLine: true,
