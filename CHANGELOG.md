@@ -1,3 +1,7 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+- Fixed: Visitor APIs were lacking the node argument.
+
 ## 0.3.1 (2018-6-9)
 
 - Added "typings" property in package.json for TypeScript consumers.
