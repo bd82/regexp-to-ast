@@ -59,6 +59,7 @@ export interface Character extends IRegExpAST {
 
 export interface Set extends IRegExpAST {
     type: "Set"
+    complement: boolean
     value: number[]
     quantifier?: Quantifier
 }
@@ -90,6 +91,13 @@ export class BaseRegExpVisitor {
      * This will dispatch to the specific visitor method.
      */
     visit(node: IRegExpAST)
+
+    /**
+     * The entry point for visiting the children of a node.
+     * Override this to filter the types of children visited
+     * or to support new types of children in extended ASTs.
+     */
+    visitChildren(node: IRegExpAST)
 
     /**
      * The specific visitor methods
