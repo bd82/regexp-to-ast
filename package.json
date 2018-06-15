@@ -35,7 +35,7 @@
     "test": "nyc mocha \"./test/**/*spec.js\"",
     "check_coverage": "nyc check-coverage --lines 100 --statements 100 --functions 100",
     "report_coverage": "cat coverage/lcov.info | node_modules/.bin/coveralls",
-    "format": "prettier --no-editorconfig --write \"**/*.@(ts|js)\"",
+    "format": "prettier --no-editorconfig --write \"**/*.@(ts|js|md)\"",
     "verify_format": "prettier --no-editorconfig --list-different  \"**/*.@(ts|js)\"",
     "type_check": "tsc"
   },
