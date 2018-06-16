@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.4 (6-16-2018)
 
 *   Types: Set now declares a complement property.
 *   Types: BaseAstVisitor now declares a visitChildren method.
