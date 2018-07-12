@@ -1396,32 +1396,10 @@ describe("The RegExp to Ast parser", () => {
                                         type: "Set",
                                         complement: false,
                                         value: [
-                                            65,
-                                            66,
-                                            67,
-                                            68,
-                                            69,
-                                            70,
-                                            71,
-                                            72,
-                                            73,
-                                            74,
-                                            75,
-                                            76,
-                                            77,
-                                            78,
-                                            79,
-                                            80,
-                                            81,
-                                            82,
-                                            83,
-                                            84,
-                                            85,
-                                            86,
-                                            87,
-                                            88,
-                                            89,
-                                            90
+                                            {
+                                                from: 65,
+                                                to: 90
+                                            }
                                         ]
                                     }
                                 ]
@@ -1448,6 +1426,7 @@ describe("The RegExp to Ast parser", () => {
                                         type: "Set",
                                         complement: false,
                                         value: [
+                                            65,
                                             45,
                                             48,
                                             49,
@@ -1458,8 +1437,7 @@ describe("The RegExp to Ast parser", () => {
                                             54,
                                             55,
                                             56,
-                                            57,
-                                            65
+                                            57
                                         ]
                                     }
                                 ]

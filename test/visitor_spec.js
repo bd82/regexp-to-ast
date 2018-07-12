@@ -164,6 +164,18 @@ describe("The regexp AST visitor", () => {
         new SetVisitor().visit(ast)
     })
 
+    it("Can visit Set with range", () => {
+        const ast = parser.pattern("/[a-z]/")
+        class SetVisitor extends BaseRegExpVisitor {
+            visitSet(node) {
+                super.visitSet(node)
+                expect(node.value).to.deep.equal([{ from: 97, to: 122 }])
+            }
+        }
+
+        new SetVisitor().visit(ast)
+    })
+
     it("Can visit Set with quantifier", () => {
         const ast = parser.pattern("/[abc]{1,4}/")
         class SetVisitor extends BaseRegExpVisitor {

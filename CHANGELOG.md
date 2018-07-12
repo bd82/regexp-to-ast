@@ -1,3 +1,15 @@
+## X.Y.Z (INSERT_DATE_HERE)
+
+*   A Set AST can now contain ranges of char codes as well as single char codes.
+    ```typescript
+    export interface Set extends IRegExpAST {
+        type: "Set"
+        complement: boolean
+        value: (number | Range)[]
+        quantifier?: Quantifier
+    }
+    ```
+
 ## 0.3.4 (6-16-2018)
 
 *   Types: Set now declares a complement property.

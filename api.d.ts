@@ -57,10 +57,12 @@ export interface Character extends IRegExpAST {
     quantifier?: Quantifier
 }
 
+export type Range = { from: number; to: number }
+
 export interface Set extends IRegExpAST {
     type: "Set"
     complement: boolean
-    value: number[]
+    value: (number | Range)[]
     quantifier?: Quantifier
 }
 
