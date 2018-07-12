@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.3.5 (7-12-2018)
 
 *   A Set AST can now contain ranges of char codes as well as single char codes.
     ```typescript
