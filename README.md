@@ -8,11 +8,11 @@ Reads a JavaScript Regular Expression **literal**(text) and outputs an Abstract 
 
 ## Installation
 
-*   npm
+-   npm
     ```
       npm install regexp-to-ast
     ```
-*   Browser
+-   Browser
     ```
       <script src="https://unpkg.com/regexp-to-ast/lib/parser.js"></script>
     ```
@@ -23,7 +23,7 @@ The [API](https://github.com/bd82/regexp-to-ast/blob/master/api.d.ts) is defined
 
 ## Usage
 
-*   Parsing to an AST:
+-   Parsing to an AST:
 
     ```javascript
     const RegExpParser = require("regexp-to-ast").RegExpParser
@@ -38,7 +38,7 @@ The [API](https://github.com/bd82/regexp-to-ast/blob/master/api.d.ts) is defined
     const anotherAstOutput = regexpParser.pattern(input2)
     ```
 
-*   Visiting the AST:
+-   Visiting the AST:
 
     ```javascript
     // parse to an AST as before.
@@ -92,10 +92,10 @@ This library is written in ES**5** style and is compatiable with all major brows
 
 ## TODO / Limitations
 
-*   Use polyFill for [string.prototype.at](https://github.com/mathiasbynens/String.prototype.at)
+-   Use polyFill for [string.prototype.at](https://github.com/mathiasbynens/String.prototype.at)
     to support unicode characters outside BMP.
-*   Descriptive error messages.
-*   Position information in error messages.
-*   Support unicode flag escapes.
-*   Ensure edge cases described in ["The madness of parsing real world JavaScript regexps"](https://hackernoon.com/the-madness-of-parsing-real-world-javascript-regexps-d9ee336df983) are supported.
-*   Support deprecated octal escapes
+-   Descriptive error messages.
+-   Position information in error messages.
+-   Support unicode flag escapes.
+-   Ensure edge cases described in ["The madness of parsing real world JavaScript regexps"](https://hackernoon.com/the-madness-of-parsing-real-world-javascript-regexps-d9ee336df983) are supported.
+-   Support deprecated octal escapes
