@@ -1,0 +1,23 @@
+{
+    "name": "@regexp-to-ast/benchmark",
+    "version": "0.0.1",
+    "description": "Benchmark for regexp-to-asp",
+    "keywords": [
+        "parser"
+    ],
+    "main": "benchmark.js",
+    "repository": "https://github.com/bd82/regexp-to-ast.git",
+    "license": "MIT",
+    "dependencies": {
+        "benchmark": "^2.1.4",
+        "lodash": "^4.17.11",
+        "regexp-to-ast": "^0.3.5"
+    },
+    "scripts": {
+        "start": "node benchmark.js"
+    },
+    "publishConfig": {
+        "access": "public"
+    },
+    "devDependencies": {}
+}
