@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.4.0 (3-16-2019)
 
 - [Huge (x75) performance improvement](https://github.com/bd82/regexp-to-ast/pull/18).
   - Thanks to [@morwen](https://github.com/morwen) :thumbsup
