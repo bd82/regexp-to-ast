@@ -627,6 +627,32 @@ describe("The RegExp to Ast parser", () => {
         })
 
         context("atoms", () => {
+            it("Looks like Quantifier", () => {
+                const ast = parser.pattern("/{{1/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    value: [
+                        {
+                            type: "Alternative",
+                            value: [
+                                {
+                                    type: "Character",
+                                    value: 123
+                                },
+                                {
+                                    type: "Character",
+                                    value: 123
+                                },
+                                {
+                                    type: "Character",
+                                    value: 49
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
             it("patternCharacter", () => {
                 const ast = parser.pattern("/b/")
                 expect(ast.value).to.deep.equal({
