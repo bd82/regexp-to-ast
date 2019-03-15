@@ -1,7 +1,7 @@
 ## X.Y.Z (INSERT_DATE_HERE)
 
 - [Huge (x75) performance improvement](https://github.com/bd82/regexp-to-ast/pull/18).
-  - Thanks to @morwen :thumbsup
+  - Thanks to [@morwen](https://github.com/morwen) :thumbsup
 
 ## 0.3.5 (7-12-2018)
 
