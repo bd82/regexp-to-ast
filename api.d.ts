@@ -8,6 +8,7 @@ export class RegExpParser {
 
 export interface IRegExpAST {
     type: string
+    loc: { begin: number; end: number }
 }
 
 export interface RegExpPattern extends IRegExpAST {

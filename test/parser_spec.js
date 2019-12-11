@@ -13,8 +13,10 @@ describe("The RegExp to Ast parser", () => {
             const ast = parser.pattern("/(?:)/")
             expect(ast).to.deep.equal({
                 type: "Pattern",
+                loc: { begin: 0, end: 6 },
                 flags: {
                     type: "Flags",
+                    loc: { begin: 6, end: 6 },
                     global: false,
                     ignoreCase: false,
                     multiLine: false,
@@ -23,18 +25,23 @@ describe("The RegExp to Ast parser", () => {
                 },
                 value: {
                     type: "Disjunction",
+                    loc: { begin: 1, end: 5 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Group",
+                                    loc: { begin: 1, end: 5 },
                                     capturing: false,
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 4, end: 4 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 4, end: 4 },
                                                 value: []
                                             }
                                         ]
@@ -52,6 +59,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/g")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 7 },
 
                     global: true,
                     ignoreCase: false,
@@ -65,6 +73,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/i")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 7 },
 
                     global: false,
                     ignoreCase: true,
@@ -78,6 +87,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/m")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 7 },
 
                     global: false,
                     ignoreCase: false,
@@ -91,6 +101,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/u")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 7 },
 
                     global: false,
                     ignoreCase: false,
@@ -104,6 +115,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/y")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 7 },
 
                     global: false,
                     ignoreCase: false,
@@ -117,6 +129,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 6 },
 
                     global: false,
                     ignoreCase: false,
@@ -130,6 +143,7 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:)/gimuy")
                 expect(ast.flags).to.deep.equal({
                     type: "Flags",
+                    loc: { begin: 6, end: 11 },
 
                     global: true,
                     ignoreCase: true,
@@ -155,20 +169,25 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/abc/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 4 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 4 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 2, end: 3 },
                                     value: 98
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 3, end: 4 },
                                     value: 99
                                 }
                             ]
@@ -181,29 +200,36 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a|b|c/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 6 },
                     value: [
                         {
+                            loc: { begin: 1, end: 2 },
                             type: "Alternative",
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 }
                             ]
                         },
                         {
                             type: "Alternative",
+                            loc: { begin: 3, end: 4 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 3, end: 4 },
                                     value: 98
                                 }
                             ]
                         },
                         {
                             type: "Alternative",
+                            loc: { begin: 5, end: 6 },
                             value: [
                                 {
+                                    loc: { begin: 5, end: 6 },
                                     type: "Character",
                                     value: 99
                                 }
@@ -217,24 +243,30 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a||c/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 5 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 2 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 }
                             ]
                         },
                         {
                             type: "Alternative",
+                            loc: { begin: 3, end: 3 },
                             value: []
                         },
                         {
                             type: "Alternative",
+                            loc: { begin: 4, end: 5 },
                             value: [
                                 {
+                                    loc: { begin: 4, end: 5 },
                                     type: "Character",
                                     value: 99
                                 }
@@ -250,15 +282,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/^a/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 3 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
-                                    type: "StartAnchor"
+                                    type: "StartAnchor",
+                                    loc: { begin: 1, end: 2 }
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 2, end: 3 },
                                     value: 97
                                 }
                             ]
@@ -271,16 +307,20 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a$/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 3 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
-                                    type: "EndAnchor"
+                                    type: "EndAnchor",
+                                    loc: { begin: 2, end: 3 }
                                 }
                             ]
                         }
@@ -292,16 +332,20 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a\\b/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 4 },
                     value: [
                         {
+                            loc: { begin: 1, end: 4 },
                             type: "Alternative",
                             value: [
                                 {
+                                    loc: { begin: 1, end: 2 },
                                     type: "Character",
                                     value: 97
                                 },
                                 {
-                                    type: "WordBoundary"
+                                    type: "WordBoundary",
+                                    loc: { begin: 2, end: 4 }
                                 }
                             ]
                         }
@@ -313,16 +357,20 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a\\B/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 4 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 4 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
-                                    type: "NonWordBoundary"
+                                    type: "NonWordBoundary",
+                                    loc: { begin: 2, end: 4 }
                                 }
                             ]
                         }
@@ -334,24 +382,34 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a(?=b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 7 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 7 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
                                     type: "Lookahead",
+                                    loc: { begin: 2, end: 7 },
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 5, end: 6 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 5, end: 6 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 5,
+                                                            end: 6
+                                                        },
                                                         value: 98
                                                     }
                                                 ]
@@ -369,24 +427,34 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a(?!b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 7 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 7 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
                                     type: "NegativeLookahead",
+                                    loc: { begin: 2, end: 7 },
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 5, end: 6 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 5, end: 6 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 5,
+                                                            end: 6
+                                                        },
                                                         value: 98
                                                     }
                                                 ]
@@ -406,15 +474,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a?/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 3 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 3 },
                                         atLeast: 0,
                                         atMost: 1,
                                         greedy: true
@@ -430,15 +502,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a*/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 3 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 3 },
                                         atLeast: 0,
                                         atMost: Infinity,
                                         greedy: true
@@ -454,15 +530,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a+/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 3 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 3 },
                                         atLeast: 1,
                                         atMost: Infinity,
                                         greedy: true
@@ -478,24 +558,30 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a{b}/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 5 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 2, end: 3 },
                                     value: 123
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 3, end: 4 },
                                     value: 98
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 4, end: 5 },
                                     value: 125
                                 }
                             ]
@@ -508,15 +594,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a{6}/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 5 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 5 },
                                         atLeast: 6,
                                         atMost: 6,
                                         greedy: true
@@ -532,15 +622,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a{2,}/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 6 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 6 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 6 },
                                         atLeast: 2,
                                         atMost: Infinity,
                                         greedy: true
@@ -556,15 +650,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a{8,12}/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 8 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 8 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 8 },
                                         atLeast: 8,
                                         atMost: 12,
                                         greedy: true
@@ -580,15 +678,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a{0,3}/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 7 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 7 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 7 },
                                         atLeast: 0,
                                         atMost: 3,
                                         greedy: true
@@ -605,15 +707,19 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/a??/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 4 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 4 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 97,
                                     quantifier: {
                                         type: "Quantifier",
+                                        loc: { begin: 2, end: 4 },
                                         atLeast: 0,
                                         atMost: 1,
                                         greedy: false
@@ -631,20 +737,25 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/{{1/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 4 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 4 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 123
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 2, end: 3 },
                                     value: 123
                                 },
                                 {
                                     type: "Character",
+                                    loc: { begin: 3, end: 4 },
                                     value: 49
                                 }
                             ]
@@ -657,12 +768,15 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/b/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 2 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 2 },
                             value: [
                                 {
                                     type: "Character",
+                                    loc: { begin: 1, end: 2 },
                                     value: 98
                                 }
                             ]
@@ -675,12 +789,15 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/./")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 2 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 2 },
                             value: [
                                 {
                                     type: "Set",
+                                    loc: { begin: 1, end: 2 },
                                     complement: true,
                                     value: [10, 13, 8232, 8233]
                                 }
@@ -696,12 +813,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\d/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 48,
                                                 49,
@@ -726,12 +846,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\D/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 48,
                                                 49,
@@ -756,12 +879,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\w/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 95,
                                                 48,
@@ -839,12 +965,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\W/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 95,
                                                 48,
@@ -922,12 +1051,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\s/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 32,
                                                 12,
@@ -968,12 +1100,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\S/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 3 },
                                             value: [
                                                 32,
                                                 12,
@@ -1016,12 +1151,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\123/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
                                     value: [
                                         {
                                             type: "GroupBackReference",
+                                            loc: { begin: 1, end: 5 },
                                             value: 123
                                         }
                                     ]
@@ -1036,12 +1174,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\f/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Character",
+                                            loc: { begin: 1, end: 3 },
                                             value: 12
                                         }
                                     ]
@@ -1054,12 +1195,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\n/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Character",
+                                            loc: { begin: 1, end: 3 },
                                             value: 10
                                         }
                                     ]
@@ -1072,12 +1216,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\r/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Character",
+                                            loc: { begin: 1, end: 3 },
                                             value: 13
                                         }
                                     ]
@@ -1090,12 +1237,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\t/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Character",
+                                            loc: { begin: 1, end: 3 },
                                             value: 9
                                         }
                                     ]
@@ -1108,12 +1258,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/\\v/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 3 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 3 },
                                     value: [
                                         {
                                             type: "Character",
+                                            loc: { begin: 1, end: 3 },
                                             value: 11
                                         }
                                     ]
@@ -1127,12 +1280,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/\\cB/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 4 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 4 },
                                 value: [
                                     {
                                         type: "Character",
+                                        loc: { begin: 1, end: 4 },
                                         value: 2
                                     }
                                 ]
@@ -1149,12 +1305,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/\\0/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 3 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 3 },
                                 value: [
                                     {
                                         type: "Character",
+                                        loc: { begin: 1, end: 3 },
                                         value: 0
                                     }
                                 ]
@@ -1173,12 +1332,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/\\u000a/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 7 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 7 },
                                 value: [
                                     {
                                         type: "Character",
+                                        loc: { begin: 1, end: 7 },
                                         value: 10
                                     }
                                 ]
@@ -1191,12 +1353,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/\\*/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 3 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 3 },
                                 value: [
                                     {
                                         type: "Character",
+                                        loc: { begin: 1, end: 3 },
                                         value: 42
                                     }
                                 ]
@@ -1212,12 +1377,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\]]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 5 },
                                             complement: false,
                                             value: [93]
                                         }
@@ -1231,12 +1399,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\b]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 5 },
                                             complement: false,
                                             value: [8]
                                         }
@@ -1250,12 +1421,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\f]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 5 },
                                             complement: false,
                                             value: [12]
                                         }
@@ -1269,13 +1443,16 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\cd]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 6 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 6 },
                                     value: [
                                         {
                                             complement: false,
                                             type: "Set",
+                                            loc: { begin: 1, end: 6 },
                                             value: [4]
                                         }
                                     ]
@@ -1288,12 +1465,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\0a]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 6 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 6 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 6 },
                                             complement: false,
                                             value: [0, 97]
                                         }
@@ -1307,12 +1487,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\xbc]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 7 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 7 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 7 },
                                             complement: false,
                                             value: [188]
                                         }
@@ -1326,13 +1509,16 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\u001a]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 9 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 9 },
                                     value: [
                                         {
                                             complement: false,
                                             type: "Set",
+                                            loc: { begin: 1, end: 9 },
                                             value: [26]
                                         }
                                     ]
@@ -1345,12 +1531,15 @@ describe("The RegExp to Ast parser", () => {
                         const ast = parser.pattern("/[\\d]/")
                         expect(ast.value).to.deep.equal({
                             type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
                             value: [
                                 {
                                     type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
                                     value: [
                                         {
                                             type: "Set",
+                                            loc: { begin: 1, end: 5 },
                                             complement: false,
                                             value: [
                                                 48,
@@ -1376,12 +1565,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/[a]/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 4 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 4 },
                                 value: [
                                     {
                                         type: "Set",
+                                        loc: { begin: 1, end: 4 },
                                         complement: false,
                                         value: [97]
                                     }
@@ -1395,12 +1587,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/[^a]/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 5 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 5 },
                                 value: [
                                     {
                                         type: "Set",
+                                        loc: { begin: 1, end: 5 },
                                         complement: true,
                                         value: [97]
                                     }
@@ -1414,12 +1609,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/[A-Z]/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 6 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 6 },
                                 value: [
                                     {
                                         type: "Set",
+                                        loc: { begin: 1, end: 6 },
                                         complement: false,
                                         value: [
                                             {
@@ -1444,12 +1642,15 @@ describe("The RegExp to Ast parser", () => {
                     const ast = parser.pattern("/[A-\\d]/")
                     expect(ast.value).to.deep.equal({
                         type: "Disjunction",
+                        loc: { begin: 1, end: 7 },
                         value: [
                             {
                                 type: "Alternative",
+                                loc: { begin: 1, end: 7 },
                                 value: [
                                     {
                                         type: "Set",
+                                        loc: { begin: 1, end: 7 },
                                         complement: false,
                                         value: [
                                             65,
@@ -1479,21 +1680,30 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(a)(b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 7 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 7 },
                             value: [
                                 {
                                     type: "Group",
+                                    loc: { begin: 1, end: 4 },
                                     capturing: true,
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 2, end: 3 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 2, end: 3 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 2,
+                                                            end: 3
+                                                        },
                                                         value: 97
                                                     }
                                                 ]
@@ -1504,15 +1714,22 @@ describe("The RegExp to Ast parser", () => {
                                 },
                                 {
                                     type: "Group",
+                                    loc: { begin: 4, end: 7 },
                                     capturing: true,
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 5, end: 6 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 5, end: 6 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 5,
+                                                            end: 6
+                                                        },
                                                         value: 98
                                                     }
                                                 ]
@@ -1531,21 +1748,30 @@ describe("The RegExp to Ast parser", () => {
                 const ast = parser.pattern("/(?:a)(b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
+                    loc: { begin: 1, end: 9 },
                     value: [
                         {
                             type: "Alternative",
+                            loc: { begin: 1, end: 9 },
                             value: [
                                 {
                                     type: "Group",
+                                    loc: { begin: 1, end: 6 },
                                     capturing: false,
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 4, end: 5 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 4, end: 5 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 4,
+                                                            end: 5
+                                                        },
                                                         value: 97
                                                     }
                                                 ]
@@ -1555,15 +1781,22 @@ describe("The RegExp to Ast parser", () => {
                                 },
                                 {
                                     type: "Group",
+                                    loc: { begin: 6, end: 9 },
                                     capturing: true,
                                     value: {
                                         type: "Disjunction",
+                                        loc: { begin: 7, end: 8 },
                                         value: [
                                             {
                                                 type: "Alternative",
+                                                loc: { begin: 7, end: 8 },
                                                 value: [
                                                     {
                                                         type: "Character",
+                                                        loc: {
+                                                            begin: 7,
+                                                            end: 8
+                                                        },
                                                         value: 98
                                                     }
                                                 ]
