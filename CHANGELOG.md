@@ -1,4 +1,4 @@
-## X.Y.Z (INSERT_DATE_HERE)
+## 0.5.0 (11-12-2019)
 
 -   [Added location to AST](https://github.com/bd82/regexp-to-ast/pull/28)
     -   Thanks to [@ConradIrwin](https://github.com/ConradIrwin) :thumbsup
