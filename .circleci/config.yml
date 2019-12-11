@@ -10,18 +10,18 @@ jobs:
       - run: yarn run ci_full_flow
       - run: yarn run report_coverage
 
-  build-node8:
+  build-node12:
     docker:
-      - image: circleci/node:8-browsers
+      - image: circleci/node:12-browsers
     working_directory: ~/repo
     steps:
       - checkout
       - run: yarn
       - run: yarn run ci_full_flow
 
-  build-node6:
+  build-node13:
     docker:
-      - image: circleci/node:6-browsers
+      - image: circleci/node:13-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -30,7 +30,7 @@ jobs:
 
   deploy:
     docker:
-      - image: circleci/node:10-browsers
+      - image: circleci/node:12-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -44,8 +44,8 @@ workflows:
   build:
     jobs:
       - build-node10
-      - build-node8
-      - build-node6
+      - build-node12
+      - build-node13
       - deploy:
           filters:
             tags:
