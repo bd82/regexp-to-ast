@@ -1559,6 +1559,31 @@ describe("The RegExp to Ast parser", () => {
                             ]
                         })
                     })
+
+                    it("inverted digits", () => {
+                        const ast = parser.pattern("/[\\D]/")
+                        expect(ast.value).to.deep.equal({
+                            type: "Disjunction",
+                            loc: { begin: 1, end: 5 },
+                            value: [
+                                {
+                                    type: "Alternative",
+                                    loc: { begin: 1, end: 5 },
+                                    value: [
+                                        {
+                                            type: "Set",
+                                            loc: { begin: 1, end: 5 },
+                                            complement: false,
+                                            value: [
+                                              {from: 0, to: 47},
+                                              {from: 58, to: 0xffff}
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        })
+                    })
                 })
 
                 it("pattern character", () => {
