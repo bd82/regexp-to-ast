@@ -762,9 +762,9 @@ get-stdin@^6.0.0:
   integrity sha512-jp4tHawyV7+fkkSKyvjuLZswblUtz+SQKzSWnBbii16BuZksJlU1wuBYXY75r+duh/llF1ur6oNwi+2ZzjKZ7g==
 
 gitty@^3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/gitty/-/gitty-3.7.0.tgz#5d70fa1980de47627629bfc2ca238a81e2379405"
-  integrity sha512-estjYbsm5oURFUQJ1Tm8OzPZIKtnLq5SUueTuSwoqiOob5tezhEjBXJYvFaiBhoKOiGLieomveqnLJARgNbcgQ==
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/gitty/-/gitty-3.7.1.tgz#11fdb4c85cd9a1b5f75574d558f0bdd774186b9c"
+  integrity sha512-SvHYMmSJeqAtNU0w18LlORkbREwrM/dXcQ+r72hBgnpZa9XDvG69iBe4CFG06yQLHE94F/leOn6K5JWZm8tmcw==
 
 glob-parent@^5.0.0, glob-parent@~5.1.0:
   version "5.1.0"
