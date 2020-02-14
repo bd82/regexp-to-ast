@@ -26,7 +26,7 @@ The [API](https://github.com/bd82/regexp-to-ast/blob/master/api.d.ts) is defined
 
     ```javascript
     const RegExpParser = require("regexp-to-ast").RegExpParser
-    const regexpParser = new RegExpParser.parser()
+    const regexpParser = new RegExpParser()
 
     // from a regexp text
     const astOutput = regexpParser.pattern("/a|b|c/g")
@@ -42,7 +42,7 @@ The [API](https://github.com/bd82/regexp-to-ast/blob/master/api.d.ts) is defined
     ```javascript
     // parse to an AST as before.
     const { RegExpParser, BaseRegExpVisitor } = require("regexp-to-ast")
-    const regexpParser = new RegExpParser.parser()
+    const regexpParser = new RegExpParser()
     const regExpAst = regexpParser.pattern("/a|b|c/g")
 
     // Override the visitor methods to add your logic.
