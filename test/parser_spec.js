@@ -468,14 +468,14 @@ describe("The RegExp to Ast parser", () => {
                 })
             })
             it("lookbehind assertion", () => {
-                const ast = parser.pattern("/a(<=b)/")
+                const ast = parser.pattern("/a(?<=b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
-                    loc: { begin: 1, end: 7 },
+                    loc: { begin: 1, end: 8 },
                     value: [
                         {
                             type: "Alternative",
-                            loc: { begin: 1, end: 7 },
+                            loc: { begin: 1, end: 8 },
                             value: [
                                 {
                                     type: "Character",
@@ -484,20 +484,20 @@ describe("The RegExp to Ast parser", () => {
                                 },
                                 {
                                     type: "Lookbehind",
-                                    loc: { begin: 2, end: 7 },
+                                    loc: { begin: 2, end: 8 },
                                     value: {
                                         type: "Disjunction",
-                                        loc: { begin: 5, end: 6 },
+                                        loc: { begin: 6, end: 7 },
                                         value: [
                                             {
                                                 type: "Alternative",
-                                                loc: { begin: 5, end: 6 },
+                                                loc: { begin: 6, end: 7 },
                                                 value: [
                                                     {
                                                         type: "Character",
                                                         loc: {
-                                                            begin: 5,
-                                                            end: 6
+                                                            begin: 6,
+                                                            end: 7
                                                         },
                                                         value: 98
                                                     }
@@ -513,14 +513,14 @@ describe("The RegExp to Ast parser", () => {
             })
 
             it("lookbehind assertion", () => {
-                const ast = parser.pattern("/a(<!b)/")
+                const ast = parser.pattern("/a(?<!b)/")
                 expect(ast.value).to.deep.equal({
                     type: "Disjunction",
-                    loc: { begin: 1, end: 7 },
+                    loc: { begin: 1, end: 8 },
                     value: [
                         {
                             type: "Alternative",
-                            loc: { begin: 1, end: 7 },
+                            loc: { begin: 1, end: 8 },
                             value: [
                                 {
                                     type: "Character",
@@ -529,20 +529,20 @@ describe("The RegExp to Ast parser", () => {
                                 },
                                 {
                                     type: "NegativeLookbehind",
-                                    loc: { begin: 2, end: 7 },
+                                    loc: { begin: 2, end: 8 },
                                     value: {
                                         type: "Disjunction",
-                                        loc: { begin: 5, end: 6 },
+                                        loc: { begin: 6, end: 7 },
                                         value: [
                                             {
                                                 type: "Alternative",
-                                                loc: { begin: 5, end: 6 },
+                                                loc: { begin: 6, end: 7 },
                                                 value: [
                                                     {
                                                         type: "Character",
                                                         loc: {
-                                                            begin: 5,
-                                                            end: 6
+                                                            begin: 6,
+                                                            end: 7
                                                         },
                                                         value: 98
                                                     }

@@ -127,7 +127,7 @@ describe("The regexp AST visitor", () => {
     })
 
     it("Can visit Lookbehind", () => {
-        const ast = parser.pattern("/a(<=a|b)/")
+        const ast = parser.pattern("/a(?<=a|b)/")
         class LookbehindVisitor extends BaseRegExpVisitor {
             visitLookbehind(node) {
                 super.visitLookbehind(node)
@@ -139,7 +139,7 @@ describe("The regexp AST visitor", () => {
     })
 
     it("Can visit NegativeLookbehind", () => {
-        const ast = parser.pattern("/a(<!a|b|c)/")
+        const ast = parser.pattern("/a(?<!a|b|c)/")
         class NegativeLookbehindVisitor extends BaseRegExpVisitor {
             visitNegativeLookbehind(node) {
                 super.visitNegativeLookbehind(node)
