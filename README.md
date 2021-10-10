@@ -3,7 +3,7 @@
 
 # regexp-to-ast
 
-Reads a JavaScript Regular Expression **literal**(text) and outputs an Abstract Syntax Tree.
+Reads a JavaScript Regular Expression **literal**(text) and outputs an Abstract Syntax Tree...
 
 ## Installation
 
