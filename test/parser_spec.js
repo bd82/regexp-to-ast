@@ -467,6 +467,96 @@ describe("The RegExp to Ast parser", () => {
                     ]
                 })
             })
+
+            it("lookbehind assertion", () => {
+                const ast = parser.pattern("/(?<=b)a/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    loc: { begin: 1, end: 8 },
+                    value: [
+                        {
+                            type: "Alternative",
+                            loc: { begin: 1, end: 8 },
+                            value: [
+                                {
+                                    type: "Lookbehind",
+                                    loc: { begin: 1, end: 7 },
+                                    value: {
+                                        type: "Disjunction",
+                                        loc: { begin: 5, end: 6 },
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                loc: { begin: 5, end: 6 },
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        loc: {
+                                                            begin: 5,
+                                                            end: 6
+                                                        },
+                                                        value: 98
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    type: "Character",
+                                    loc: { begin: 7, end: 8 },
+                                    value: 97
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
+
+            it("negative lookbehind assertion", () => {
+                const ast = parser.pattern("/(?<!b)a/")
+                expect(ast.value).to.deep.equal({
+                    type: "Disjunction",
+                    loc: { begin: 1, end: 8 },
+                    value: [
+                        {
+                            type: "Alternative",
+                            loc: { begin: 1, end: 8 },
+                            value: [
+                                {
+                                    type: "NegativeLookbehind",
+                                    loc: { begin: 1, end: 7 },
+                                    value: {
+                                        type: "Disjunction",
+                                        loc: { begin: 5, end: 6 },
+                                        value: [
+                                            {
+                                                type: "Alternative",
+                                                loc: { begin: 5, end: 6 },
+                                                value: [
+                                                    {
+                                                        type: "Character",
+                                                        loc: {
+                                                            begin: 5,
+                                                            end: 6
+                                                        },
+                                                        value: 98
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                {
+                                    type: "Character",
+                                    loc: { begin: 7, end: 8 },
+                                    value: 97
+                                }
+                            ]
+                        }
+                    ]
+                })
+            })
         })
 
         context("quantifiers", () => {

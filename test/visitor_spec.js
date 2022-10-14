@@ -126,6 +126,30 @@ describe("The regexp AST visitor", () => {
         new NegativeLookaheadVisitor().visit(ast)
     })
 
+    it("Can visit Lookbehind", () => {
+        const ast = parser.pattern("/(?<=a|b)a/")
+        class LookbehindVisitor extends BaseRegExpVisitor {
+            visitLookbehind(node) {
+                super.visitLookbehind(node)
+                expect(node.value.value).to.have.lengthOf(2)
+            }
+        }
+
+        new LookbehindVisitor().visit(ast)
+    })
+
+    it("Can visit NegativeLookbehind", () => {
+        const ast = parser.pattern("/(?<!a|b|c)a/")
+        class NegativeLookbehindVisitor extends BaseRegExpVisitor {
+            visitNegativeLookbehind(node) {
+                super.visitNegativeLookbehind(node)
+                expect(node.value.value).to.have.lengthOf(3)
+            }
+        }
+
+        new NegativeLookbehindVisitor().visit(ast)
+    })
+
     it("Can visit Character", () => {
         const ast = parser.pattern("/a/")
         class CharacterVisitor extends BaseRegExpVisitor {
