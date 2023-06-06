@@ -6,6 +6,9 @@
   "author": "Shahar Soel",
   "license": "MIT",
   "description": "Parses a Regular Expression and outputs an AST",
+  "exports": {
+    ".": "./lib/regexp-to-ast.js"
+  },
   "keywords": [
     "regExp",
     "parser",
